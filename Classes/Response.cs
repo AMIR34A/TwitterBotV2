@@ -40,28 +40,29 @@ namespace TwitterBotV2.Classes
                     break;
 
                 default:
-                    using (TwitterDbContext twitterDb = new TwitterDbContext())
+                    if (update.Message.Text.Contains("https://twitter.com/") || update.Message.Text.Contains("http://twitter.com/"))
+                        await methods.ResponseToGetTweetAsync(update.Message.Text, botClient, update);
+
+                    else if (update.Message.Text.Contains("/trends"))
                     {
-                        if (update.Message.Text.Contains("https://twitter.com/") || update.Message.Text.Contains("http://twitter.com/"))
-                            await methods.ResponseToGetTweetAsync(update.Message.Text, botClient, update);
-
-                        else if (update.Message.Text.Contains("/trends"))
+                        var items = update.Message.Text.Split(' ');
+                        if (items.Length == 4)
                         {
-                            var items = update.Message.Text.Split(' ');
-                            if (items.Length == 4)
-                            {
-                                int count = int.Parse(items[3]);
+                            int count = int.Parse(items[3]);
 
-                                if (1 > count || count > 20)
-                                    count = 4;
-                                await methods.ResponseToGetTrendsAsync(botClient, update, double.Parse(items[1]), double.Parse(items[2]), count);
-                            }
-                            else
-                                await methods.ResponseToGetTrendsAsync(botClient, update);
+                            if (1 > count || count > 20)
+                                count = 4;
+                            await methods.ResponseToGetTrendsAsync(botClient, update, double.Parse(items[1]), double.Parse(items[2]), count);
                         }
                         else
+                            await methods.ResponseToGetTrendsAsync(botClient, update);
+                    }
+                    else
+                    {
+                        using (TwitterDbContext twitterDb = new TwitterDbContext())
                         {
                             var user = twitterDb.Users.FirstOrDefault(user => user.ChatId == update.Message.Chat.Id);
+
                             if (user.Step == UserStep.ChatIdMenu)
                                 await methods.ResponseToChatIdChannelAsync(botClient, update);
                             else
