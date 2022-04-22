@@ -10,6 +10,7 @@ namespace TwitterBotV2
 
         public static async Task Main()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             try
             {
                 using (TwitterDbContext twitterDb = new TwitterDbContext())
@@ -20,9 +21,7 @@ namespace TwitterBotV2
             }
             catch (Exception ex)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"{DateTime.Now:yyyy/MM//dd-HH:mm:ss} | {ex.Message}");
-                Console.WriteLine(ex.StackTrace);
                 Console.WriteLine("------------------------------------------------------");
             }
             Console.ReadKey();
