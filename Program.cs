@@ -6,7 +6,7 @@ namespace TwitterBotV2
 {
     class Program
     {
-        static TelegramBotClient bot = new TelegramBotClient("1874331325:AAHMw8_QNcIIwI2mNvnY3bWiZ4U0PmWJJkk");
+        static TelegramBotClient bot = new TelegramBotClient("Token-Bot");
 
         public static async Task Main()
         {
