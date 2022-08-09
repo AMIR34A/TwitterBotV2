@@ -10,7 +10,7 @@ namespace TwitterBotV2.Classes
 {
     internal class Methods
     {
-        TwitterClient userClient = new TwitterClient();
+        TwitterClient userClient = new TwitterClient("Consumer Key", "Consumer Secret", "Access Token", "Access Secret");
 
         #region ResponseToText
         public async Task ResponseToStartAsync(TelegramBotClient botClient, Update update)
