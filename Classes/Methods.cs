@@ -10,7 +10,7 @@ namespace TwitterBotV2.Classes
 {
     internal class Methods
     {
-        TwitterClient userClient = new TwitterClient("zAra0T5tcxYqoZzGbzNn8zB1h", "2VUh6nBQO2OX7GHDMPLWaxmRziXrZyjaUWOn0COVtIP6MxoV8O", "1297246709253394432-HZd5WrvERipQyVNwcmsYS7kGrikeje", "FhNO7jinFZmHKPyJoRLnAsDXmK8QWK9VF6NwnSz38myXO");
+        TwitterClient userClient = new TwitterClient();
 
         #region ResponseToText
         public async Task ResponseToStartAsync(TelegramBotClient botClient, Update update)
